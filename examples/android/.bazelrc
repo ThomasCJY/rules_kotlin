@@ -1,1 +1,4 @@
 common --lockfile_mode=off
+
+common --experimental_google_legacy_api=true
+common --experimental_enable_android_migration_apis=true

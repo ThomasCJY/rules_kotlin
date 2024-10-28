@@ -8,7 +8,7 @@
       android:maxSdkVersion="29" />
 
   <application
-      android:label="Rules Kotlin App"
+      android:label="@string/where_you_at"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
     <activity

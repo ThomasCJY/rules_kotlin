@@ -1,92 +1,92 @@
-workspace(name = "android_example")
-
-local_repository(
-    name = "release_archive",
-    path = "../../src/main/starlark/release_archive",
-)
-
-load("@release_archive//:repository.bzl", "archive_repository")
-
-archive_repository(
-    name = "rules_kotlin",
-    local_path = "../..",
-)
-
-load("@rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "versions")
-
-kotlin_repositories()
-
-register_toolchains("//bzl:experimental_toolchain")
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-http_archive(
-    name = "bazel_skylib",
-    sha256 = versions.SKYLIB_SHA,
-    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/%s/bazel-skylib-%s.tar.gz" % (
-        versions.SKYLIB_VERSION,
-        versions.SKYLIB_VERSION,
-    )],
-)
-
-http_archive(
-    name = "rules_jvm_external",
-    sha256 = versions.RULES_JVM_EXTERNAL_SHA,
-    strip_prefix = "rules_jvm_external-%s" % versions.RULES_JVM_EXTERNAL_TAG,
-    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/%s/rules_jvm_external-%s.tar.gz" % (
-        versions.RULES_JVM_EXTERNAL_TAG,
-        versions.RULES_JVM_EXTERNAL_TAG,
-    ),
-)
-
-load("@rules_jvm_external//:defs.bzl", "maven_install")
-
-maven_install(
-    artifacts = [
-        "androidx.appcompat:appcompat:1.0.0",
-        "junit:junit:4.12",
-        "androidx.test.espresso:espresso-core:3.1.1",
-        "org.hamcrest:hamcrest-library:1.3",
-        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc",
-        "com.squareup.moshi:moshi:1.14.0",
-        "com.squareup.moshi:moshi-kotlin:1.14.0",
-        "com.squareup.moshi:moshi-kotlin-codegen:1.14.0",
-        "com.google.dagger:dagger:2.45",
-        "com.google.dagger:dagger-compiler:2.45",
-        "com.google.dagger:dagger-producers:2.45",
-        "com.google.auto.value:auto-value:1.6.5",
-        "com.google.auto.value:auto-value-annotations:1.6.5",
-        "org.robolectric:robolectric:4.10.3",
-    ],
-    repositories = [
-        "https://maven.google.com",
-        "https://repo1.maven.org/maven2",
-    ],
-)
-
-http_archive(
-    name = "rules_android",
-    sha256 = versions.ANDROID.SHA,
-    strip_prefix = "rules_android-%s" % versions.ANDROID.VERSION,
-    urls = ["https://github.com/bazelbuild/rules_android/archive/v%s.zip" % versions.ANDROID.VERSION],
-)
-
-load(
-    "@rules_android//android:rules.bzl",
-    "android_sdk_repository",
-)
-
-android_sdk_repository(name = "androidsdk")
-
-http_archive(
-    name = "robolectric",
-    sha256 = "1b199a932cbde4af728dd8275937091adbb89a4bf63d326de49e6d0a42e723bf",
-    strip_prefix = "robolectric-bazel-4.10.3",
-    urls = ["https://github.com/robolectric/robolectric-bazel/archive/4.10.3.tar.gz"],
-)
-
-load("@robolectric//bazel:robolectric.bzl", "robolectric_repositories")
-
-robolectric_repositories()
-
-android_ndk_repository(name = "androidndk")
+#workspace(name = "android_example")
+#
+#local_repository(
+#    name = "release_archive",
+#    path = "../../src/main/starlark/release_archive",
+#)
+#
+#load("@release_archive//:repository.bzl", "archive_repository")
+#
+#archive_repository(
+#    name = "rules_kotlin",
+#    local_path = "../..",
+#)
+#
+#load("@rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "versions")
+#
+#kotlin_repositories()
+#
+#register_toolchains("//bzl:experimental_toolchain")
+#
+#load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+#
+#http_archive(
+#    name = "bazel_skylib",
+#    sha256 = versions.SKYLIB_SHA,
+#    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/%s/bazel-skylib-%s.tar.gz" % (
+#        versions.SKYLIB_VERSION,
+#        versions.SKYLIB_VERSION,
+#    )],
+#)
+#
+#http_archive(
+#    name = "rules_jvm_external",
+#    sha256 = versions.RULES_JVM_EXTERNAL_SHA,
+#    strip_prefix = "rules_jvm_external-%s" % versions.RULES_JVM_EXTERNAL_TAG,
+#    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/%s/rules_jvm_external-%s.tar.gz" % (
+#        versions.RULES_JVM_EXTERNAL_TAG,
+#        versions.RULES_JVM_EXTERNAL_TAG,
+#    ),
+#)
+#
+#load("@rules_jvm_external//:defs.bzl", "maven_install")
+#
+#maven_install(
+#    artifacts = [
+#        "androidx.appcompat:appcompat:1.0.0",
+#        "junit:junit:4.12",
+#        "androidx.test.espresso:espresso-core:3.1.1",
+#        "org.hamcrest:hamcrest-library:1.3",
+#        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc",
+#        "com.squareup.moshi:moshi:1.14.0",
+#        "com.squareup.moshi:moshi-kotlin:1.14.0",
+#        "com.squareup.moshi:moshi-kotlin-codegen:1.14.0",
+#        "com.google.dagger:dagger:2.45",
+#        "com.google.dagger:dagger-compiler:2.45",
+#        "com.google.dagger:dagger-producers:2.45",
+#        "com.google.auto.value:auto-value:1.6.5",
+#        "com.google.auto.value:auto-value-annotations:1.6.5",
+#        "org.robolectric:robolectric:4.10.3",
+#    ],
+#    repositories = [
+#        "https://maven.google.com",
+#        "https://repo1.maven.org/maven2",
+#    ],
+#)
+#
+#http_archive(
+#    name = "rules_android",
+#    sha256 = versions.ANDROID.SHA,
+#    strip_prefix = "rules_android-%s" % versions.ANDROID.VERSION,
+#    urls = ["https://github.com/bazelbuild/rules_android/archive/v%s.zip" % versions.ANDROID.VERSION],
+#)
+#
+#load(
+#    "@rules_android//android:rules.bzl",
+#    "android_sdk_repository",
+#)
+#
+#android_sdk_repository(name = "androidsdk")
+#
+#http_archive(
+#    name = "robolectric",
+#    sha256 = "1b199a932cbde4af728dd8275937091adbb89a4bf63d326de49e6d0a42e723bf",
+#    strip_prefix = "robolectric-bazel-4.10.3",
+#    urls = ["https://github.com/robolectric/robolectric-bazel/archive/4.10.3.tar.gz"],
+#)
+#
+#load("@robolectric//bazel:robolectric.bzl", "robolectric_repositories")
+#
+#robolectric_repositories()
+#
+#android_ndk_repository(name = "androidndk")

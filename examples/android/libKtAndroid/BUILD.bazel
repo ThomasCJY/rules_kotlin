@@ -16,16 +16,16 @@ java_plugin(
     name = "autovalue",
     generates_api = 1,
     processor_class = "com.google.auto.value.processor.AutoValueProcessor",
-    deps = ["@maven//:com_google_auto_value_auto_value"],
+    deps = ["@maven_install//:com_google_auto_value_auto_value"],
 )
 
 kt_ksp_plugin(
     name = "moshi-kotlin-codegen",
     processor_class = "com.squareup.moshi.kotlin.codegen.ksp.JsonClassSymbolProcessorProvider",
     deps = [
-        "@maven//:com_squareup_moshi_moshi",
-        "@maven//:com_squareup_moshi_moshi_kotlin",
-        "@maven//:com_squareup_moshi_moshi_kotlin_codegen",
+        "@maven_install//:com_squareup_moshi_moshi",
+        "@maven_install//:com_squareup_moshi_moshi_kotlin",
+        "@maven_install//:com_squareup_moshi_moshi_kotlin_codegen",
     ],
 )
 
@@ -44,10 +44,10 @@ kt_android_library(
     visibility = ["//visibility:public"],
     deps = [
         ":res2",
-        "@maven//:androidx_appcompat_appcompat",
-        "@maven//:com_google_auto_value_auto_value_annotations",
-        "@maven//:com_squareup_moshi_moshi",
-        "@maven//:org_jetbrains_kotlinx_kotlinx_serialization_runtime",
+        "@maven_install//:androidx_appcompat_appcompat",
+        "@maven_install//:com_google_auto_value_auto_value_annotations",
+        "@maven_install//:com_squareup_moshi_moshi",
+        "@maven_install//:org_jetbrains_kotlinx_kotlinx_serialization_runtime",
     ],
 )
 
